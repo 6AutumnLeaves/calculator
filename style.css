@@ -1,18 +1,47 @@
 body {
-    height: 100vh;
+    min-height: 100vh;
+}
+.container {
+    min-height: 100vh;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#calculator {
+    /* min-height: 100vh; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0; */
+    /* padding: 20px; */
+    /* background: #000000; */
+    border: black solid 5px;
+}
+
+#screen {
+
 }
 #button-grid {
-    
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
     grid-template-areas:
     "clear clear delete delete"
     "seven eight nine divide"
     "four five six multiply"
     "one two three subtract"
     "decimal zero equals add"
+}
+button {
+    padding: 30px 40px;
+    font-size: 20px;
+}
+button:hover {
+    cursor: pointer;
+    transition: .5s;
+    background-color: darkgrey;
 }
 
 .item-clear {
