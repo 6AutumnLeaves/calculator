@@ -1,33 +1,35 @@
 body {
     min-height: 100vh;
+    min-width: 100vh;
 }
-.container {
+.flex-container {
     min-height: 100vh;;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #calculator {
-    /* min-height: 100vh; */
-    /* display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0; */
-    /* padding: 20px; */
-    /* background: #000000; */
     border: black solid 5px;
 }
 
 #screen {
-
+    padding: 40px 183px;
+    border: solid black 1px;
+    grid-area: screen
 }
-#button-grid {
+.grid-container {
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
+    gap: 10px;
+    max-width: 50vh;
     grid-template-areas:
+    "screen screen screen screen"
+    "screen screen screen screen"
     "clear clear delete delete"
     "seven eight nine divide"
     "four five six multiply"
@@ -43,6 +45,7 @@ button:hover {
     transition: .5s;
     background-color: darkgrey;
 }
+
 
 .item-clear {
     grid-area: clear;
