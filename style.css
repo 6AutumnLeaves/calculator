@@ -1,0 +1,76 @@
+body {
+    height: 100vh;
+}
+#button-grid {
+    
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+    "clear clear delete delete"
+    "seven eight nine divide"
+    "four five six multiply"
+    "one two three subtract"
+    "decimal zero equals add"
+}
+
+.item-clear {
+    grid-area: clear;
+}
+.item-delete {
+    grid-area: delete;
+}
+.item-7 {
+    grid-area: seven;
+}
+
+.item-8 {
+    grid-area: eight;
+}
+
+.item-9 {
+    grid-area: nine;
+}
+
+.item-divide {
+    grid-area: divide;
+}
+.item-4 {
+    grid-area: four;
+}
+
+.item-5 {
+    grid-area: five;
+}
+
+.item-6 {
+    grid-area: six;
+}
+.item-multiply {
+    grid-area: multiply;
+}
+.item-1 {
+    grid-area: one;
+}
+.item-2{
+    grid-area: two;
+}
+.item-3 {
+    grid-area: three;
+}
+.item-subtract {
+    grid-area: subtract;
+}
+.item-decimal {
+    grid-area: decimal;
+}
+.item-0 {
+    grid-area: zero;
+}
+.item-equal{
+    grid-area: equals;
+}
+.item-add {
+    grid-area: add;
+}
