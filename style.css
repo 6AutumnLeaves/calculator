@@ -3,11 +3,17 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 .flex-container {
-    min-height: 100vh;
-    max-height: 70vh;
+    min-height: 90vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container-2 {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
 }
 
 #screen {
@@ -15,17 +21,18 @@ body {
     border: solid black 1px;
     grid-area: screen;
     border-radius: 10px;
+    background: white;
 }
 .grid-container {
     display: grid;
-    padding: 30px;
-    border: solid black 5px;
-    border-radius: 10px;
+    padding: 35px;
+    /* border: solid black 5px; */
+    background: #393433;
+    border-radius: 15px;
     align-items: center;
     justify-content: center;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    /* max-width: 50vh; */
     grid-template-areas:
     "screen screen screen screen"
     "screen screen screen screen"
@@ -37,25 +44,42 @@ body {
 }
 button {
     padding: 30px 40px;
-
+    border: 0;
     border-radius: 10px;
     font-size: 1.2rem;
     font-family: inherit;
     font-weight: bold;
-    transition: .5s;
+    transition: .25s;
 }
 button:hover {
     cursor: pointer;
-    transition: .5s;
+    transition: .25s;
     background-color: darkgrey;
 }
 
+.operator:hover {
+background:#83b849;
+}
 
 .item-clear {
     grid-area: clear;
+    background: #ffe878;
+}
+
+.item-clear:hover {
+    /* background: #bb655c; */
+    background: goldenrod;
+    color:white;
 }
 .item-delete {
     grid-area: delete;
+    background: #648cc9;
+}
+.item-delete:hover {
+    /* background: #a45a52; */
+    /* background: #1f3667; */
+    background: #244c66;
+    color: white;
 }
 .item-7 {
     grid-area: seven;
@@ -109,4 +133,22 @@ button:hover {
 }
 .item-add {
     grid-area: add;
+}
+
+footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.3rem;
+}
+
+img {
+    background:none;
+    transition: .8s;
+}
+
+img:hover {
+    transition: .8s;
+    transform: scale(1.7);
+    filter:opacity(50%);
+    /* filter: sepia(0); */
 }
