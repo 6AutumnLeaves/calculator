@@ -17,11 +17,17 @@ body {
 }
 
 #screen {
+    display: flex;
     padding: 40px 183px;
     border: solid black 1px;
     grid-area: screen;
     border-radius: 10px;
     background: white;
+    justify-content: flex-end;
+}
+
+#screen-content {
+    font-size:x-large;
 }
 .grid-container {
     display: grid;

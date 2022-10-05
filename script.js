@@ -1,8 +1,10 @@
 //operations 
 const numberButtons = document.querySelectorAll(".number");
+const screen = document.getElementById("screen-content");
 // let numbers = [];
-let firstNumber = []
-let secondNumber = []
+let firstNumber = [];
+let secondNumber = [];
+let displayNumber = 0;
 let operation;
 let result = 0;
 let takeSecondNumber = false;
@@ -18,9 +20,11 @@ const clearNumbers = function() {
     console.log("Clear has been clicked!");
     firstNumber = [];
     secondNumber = [];
+    updateScreen();
     takeSecondNumber = false;
     console.log(`First Number: ${firstNumber}`);
-    console.log(`Second Number: ${secondNumber}`);
+    console.log(`Second Number: ${secondNumber}`)
+    console.log(`Take Second Number: ${takeSecondNumber}`);
 };
 
 const deleteNumber = () => {
@@ -30,11 +34,17 @@ const deleteNumber = () => {
 
 const takeNumber = function(number) {
     if(!takeSecondNumber) {
-        firstNumber.push(number);
-        console.log(`First Number: ${firstNumber}`);
+        firstNumber.push(number); 
+        removeCommasFromScreen();
+        console.log(`First Number: ${displayNumber}`);
+        console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
+        updateScreen(displayNumber);
     } else {
         secondNumber.push(number);
-        console.log(`Second Number: ${secondNumber}`);
+        removeCommasFromScreen();
+        console.log(`Second Number: ${displayNumber}`);
+        console.log(`Display Number: ${displayNumber}` + `Type: ` + typeof(displayNumber))
+        updateScreen(displayNumber);
     }
 
 
@@ -57,6 +67,7 @@ const calculate = () => {
     console.log(`Second Number: ${secondNumber}`);
     console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
+    updateScreen(result);
     console.log(`Result: ${result}`);
     // console.log(`The calculation is ${operate(operation, firstNumber, secondNumber)}`);
     // return operate(operation, firstNumber, secondNumber);
@@ -72,4 +83,23 @@ const joinNumberArray = () => {
 };
 
 
-// const updateScreen = ()=>;
+const updateScreen = (screenText)=> {
+if(firstNumber.length !== 0) {
+    screen.textContent = screenText;
+}else {
+screen.textContent = 0;
+}
+};
+
+const removeCommasFromScreen = () => {
+    if(!takeSecondNumber) {
+        //By default, writing join like "join()" will separate each number by a comma.
+        //By writing "join('')", they will not be separated.
+        displayNumber = firstNumber.join('')
+    } else {
+        displayNumber = secondNumber.join('');
+    }
+
+}
+
+updateScreen();
