@@ -150,5 +150,4 @@ img:hover {
     transition: .8s;
     transform: scale(1.7);
     filter:opacity(50%);
-    /* filter: sepia(0); */
 }
