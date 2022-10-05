@@ -4,7 +4,7 @@ const screen = document.getElementById("screen-content");
 // let numbers = [];
 let firstNumber = [];
 let secondNumber = [];
-let displayNumber = 0;
+let displayNumber = '';
 let operation;
 let result = 0;
 let takeSecondNumber = false;
@@ -57,7 +57,16 @@ const takeOperation = (operator) => {
     operation = operator;
     console.log(`The operation is ${operation}`);
     console.log(`Take second number?:${takeSecondNumber}`);
+    if(operation == add) {
+        updateScreen('+');
+    } else if(operation == subtract){
+        updateScreen('-');
+    } else if(operation == multiply){
+        updateScreen('x');
+    } else if(operation == divide){
+        updateScreen('÷');
     }
+}
 }
 
 const calculate = () => {
@@ -67,7 +76,12 @@ const calculate = () => {
     console.log(`Second Number: ${secondNumber}`);
     console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
-    updateScreen(result);
+    updateScreen(` = ${result}`);
+    firstNumber = [];
+    secondNumber = [];
+    firstNumber.push(result);
+    console.log(`After Calc, firstNum is ${firstNumber}`);
+    console.log(takeSecondNumber);
     console.log(`Result: ${result}`);
     // console.log(`The calculation is ${operate(operation, firstNumber, secondNumber)}`);
     // return operate(operation, firstNumber, secondNumber);
@@ -85,8 +99,8 @@ const joinNumberArray = () => {
 
 const updateScreen = (screenText)=> {
 if(firstNumber.length !== 0) {
-    screen.textContent = screenText;
-}else {
+    screen.textContent += screenText;
+}else{
 screen.textContent = 0;
 }
 };

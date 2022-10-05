@@ -4,7 +4,6 @@ body {
 }
 .flex-container {
     min-height: 90vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,11 +22,13 @@ body {
     grid-area: screen;
     border-radius: 10px;
     background: white;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 #screen-content {
     font-size:x-large;
+    flex-wrap: wrap;
+    max-width: 10px;
 }
 .grid-container {
     display: grid;
