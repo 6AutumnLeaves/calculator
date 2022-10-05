@@ -4,6 +4,7 @@ const numberButtons = document.querySelectorAll(".number");
 let firstNumber = []
 let secondNumber = []
 let operation;
+let result = 0;
 let takeSecondNumber = false;
 
 
@@ -43,7 +44,7 @@ const takeNumber = function(number) {
 const takeOperation = (operator) => {
     if(firstNumber !== []) {
     takeSecondNumber = !takeSecondNumber;
-    operation = operator.name;
+    operation = operator;
     console.log(`The operation is ${operation}`);
     console.log(`Take second number?:${takeSecondNumber}`);
     }
@@ -54,14 +55,16 @@ const calculate = () => {
     joinNumberArray();
     console.log(`First Number: ${firstNumber}`);
     console.log(`Second Number: ${secondNumber}`);
-    firstNumber = [];
-    secondNumber = [];
+    console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
+    result = operate(operation, firstNumber, secondNumber);
+    console.log(`Result: ${result}`);
     // console.log(`The calculation is ${operate(operation, firstNumber, secondNumber)}`);
     // return operate(operation, firstNumber, secondNumber);
 
 
 };
 const joinNumberArray = () => {
+    //Added the unary operator to change each number from a string to a number
     firstNumber = +firstNumber.join().replaceAll(',', '');
     secondNumber = +secondNumber.join().replaceAll(',', '');
     console.log('First Number Type:' + typeof(firstNumber))
