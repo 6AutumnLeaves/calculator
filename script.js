@@ -1,10 +1,11 @@
 //operations 
 const numberButtons = document.querySelectorAll(".number");
-const screen = document.getElementById("screen-content");
-// let numbers = [];
+const currentMath = document.getElementById("history");
+const currentNumber = document.getElementById("current");
+
 let firstNumber = [];
 let secondNumber = [];
-let displayNumber = '';
+let displayNumber = currentNumber;
 let operation;
 let result = 0;
 let takeSecondNumber = false;
@@ -25,15 +26,24 @@ const clearNumbers = function() {
     console.log(`First Number: ${firstNumber}`);
     console.log(`Second Number: ${secondNumber}`)
     console.log(`Take Second Number: ${takeSecondNumber}`);
+    clearScreen();
 };
 
-const deleteNumber = () => {
-    console.log("Delete has been clicked!");
-    numbers.pop();
+const clearScreen = () => {
+    currentMath.textContent = '';
+    currentNumber.textContent = 0;
 }
+
+// const deleteNumber = () => {
+//     console.log("Delete has been clicked!");
+//     numbers.pop();
+// }
 
 const takeNumber = function(number) {
     if(!takeSecondNumber) {
+        if(firstNumber.length === 0) {
+            removeZero();
+        }
         firstNumber.push(number); 
         removeCommasFromScreen();
         console.log(`First Number: ${displayNumber}`);
@@ -76,7 +86,7 @@ const calculate = () => {
     console.log(`Second Number: ${secondNumber}`);
     console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
-    updateScreen(` = ${result}`);
+    updateScreen(`=${result}`);
     firstNumber = [];
     secondNumber = [];
     firstNumber.push(result);
@@ -98,12 +108,17 @@ const joinNumberArray = () => {
 
 
 const updateScreen = (screenText)=> {
-if(firstNumber.length !== 0) {
-    screen.textContent += screenText;
-}else{
-screen.textContent = 0;
+if(firstNumber.length !== 0){
+    currentMath.textContent += screenText;
+    // currentNumber.textContent += screenText;
+} 
 }
-};
+
+const removeZero = () => {
+    currentNumber.textContent = '';
+}
+
+
 
 const removeCommasFromScreen = () => {
     if(!takeSecondNumber) {
@@ -116,4 +131,3 @@ const removeCommasFromScreen = () => {
 
 }
 
-updateScreen();
