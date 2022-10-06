@@ -18,10 +18,13 @@ const divide = (a, b) => (a / b);
 const operate = (operation, a, b) => operation(a, b);
 
 const clearNumbers = function() {
+
     console.log("Clear has been clicked!");
     firstNumber = [];
     secondNumber = [];
     result = 0;
+    displayNumber = undefined;
+    operation = undefined;
     updateScreen();
     takeSecondNumber = false;
     console.log(`First Number: ${firstNumber}`);
