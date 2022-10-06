@@ -44,14 +44,14 @@ const takeNumber = function(number) {
     if(!takeSecondNumber) {
         firstNumber.push(number); 
         removeCommasFromScreen();
-        console.log(`First Number: ${displayNumber}`);
-        console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
+        // console.log(`First Number: ${displayNumber}`);
+        // console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
         updateScreen(number);
     } else {
         secondNumber.push(number);
         removeCommasFromScreen();
-        console.log(`Second Number: ${displayNumber}`);
-        console.log(`Display Number: ${displayNumber}` + `Type: ` + typeof(displayNumber))
+        // console.log(`Second Number: ${displayNumber}`);
+        // console.log(`Display Number: ${displayNumber}` + `Type: ` + typeof(displayNumber))
         updateScreen(number);
     }
 
@@ -63,6 +63,7 @@ const takeOperation = (operator) => {
     if(firstNumber !== []) {
     takeSecondNumber = !takeSecondNumber;
     operation = operator;
+    currentMath.textContent = displayNumber;
     console.log(`The operation is ${operation}`);
     console.log(`Take second number?:${takeSecondNumber}`);
     if(operation == add) {
@@ -100,17 +101,21 @@ const joinNumberArray = () => {
     //Added the unary operator to change each number from a string to a number
     firstNumber = +firstNumber.join().replaceAll(',', '');
     secondNumber = +secondNumber.join().replaceAll(',', '');
-    console.log('First Number Type:' + typeof(firstNumber))
-    console.log('Second Number Type:' + typeof(secondNumber))
 };
 
 
 const updateScreen = (screenText)=> {
-if(firstNumber.length !== 0){
+if((firstNumber.length ===1) && (operation === undefined)){
+    currentNumber.textContent = (result || displayNumber);
+    // if(!operation === undefined) {
+    //     currentMath.textContent +=  displayNumber;
+    // }
+    // currentNumber.textContent += screenText;
+}else{
     currentNumber.textContent = (result || displayNumber);
     currentMath.textContent += screenText;
-    // currentNumber.textContent += screenText;
-} 
+}
+
 }
 
 
