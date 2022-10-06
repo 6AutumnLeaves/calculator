@@ -21,6 +21,7 @@ const clearNumbers = function() {
     console.log("Clear has been clicked!");
     firstNumber = [];
     secondNumber = [];
+    result = 0;
     updateScreen();
     takeSecondNumber = false;
     console.log(`First Number: ${firstNumber}`);
@@ -41,20 +42,17 @@ const clearScreen = () => {
 
 const takeNumber = function(number) {
     if(!takeSecondNumber) {
-        if(firstNumber.length === 0) {
-            removeZero();
-        }
         firstNumber.push(number); 
         removeCommasFromScreen();
         console.log(`First Number: ${displayNumber}`);
         console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
-        updateScreen(displayNumber);
+        updateScreen(number);
     } else {
         secondNumber.push(number);
         removeCommasFromScreen();
         console.log(`Second Number: ${displayNumber}`);
         console.log(`Display Number: ${displayNumber}` + `Type: ` + typeof(displayNumber))
-        updateScreen(displayNumber);
+        updateScreen(number);
     }
 
 
@@ -86,7 +84,7 @@ const calculate = () => {
     console.log(`Second Number: ${secondNumber}`);
     console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
-    updateScreen(`=${result}`);
+    updateScreen(` = ${result}`);
     firstNumber = [];
     secondNumber = [];
     firstNumber.push(result);
@@ -109,14 +107,13 @@ const joinNumberArray = () => {
 
 const updateScreen = (screenText)=> {
 if(firstNumber.length !== 0){
+    currentNumber.textContent = (result || displayNumber);
     currentMath.textContent += screenText;
     // currentNumber.textContent += screenText;
 } 
 }
 
-const removeZero = () => {
-    currentNumber.textContent = '';
-}
+
 
 
 

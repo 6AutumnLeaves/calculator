@@ -47,12 +47,17 @@ body {
     border-radius: 10px;
     background: white;
     align-items: flex-end;
+    gap: 12px;
     
+}
+#history {
+    font-size: 20px;
+    padding-right: 17px;
 }
 
 #current {
     font-size: 40px;
-    padding: 7px;
+    padding: 12px;
 }
 
 
