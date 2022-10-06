@@ -2,10 +2,11 @@ let firstNumber = [];
 let secondNumber = [];
 let displayNumber;
 let operation;
-let result = 0;
-let operatorTaken = false;
+let result;
 let canTakeOperation = false;
 let takeSecondNumber = false;
+let secondNumberTaken = false;
+let decimalPressed = false;
 const numberButtons = document.querySelectorAll(".number");
 const currentMath = document.getElementById("history");
 const currentNumber = document.getElementById("current");
@@ -24,11 +25,13 @@ const clearNumbers = function() {
     console.log("Clear has been clicked!");
     firstNumber = [];
     secondNumber = [];
-    result = 0;
+    result = undefined;
     displayNumber = undefined;
     operation = undefined;
-    updateScreen();
+    canTakeOperation = false;
+    equalPressed = false;
     takeSecondNumber = false;
+    updateScreen();
     console.log(`First Number: ${firstNumber}`);
     console.log(`Second Number: ${secondNumber}`)
     console.log(`Take Second Number: ${takeSecondNumber}`);
@@ -45,62 +48,10 @@ const clearScreen = () => {
 //     numbers.pop();
 // }
 
-const takeNumber = function(number) {
-    canTakeOperation = true;
-    console.log(`Can Take Operation ${canTakeOperation}`);
-    if(!takeSecondNumber) {
-        firstNumber.push(number); 
-        removeCommasFromScreen();
-        // console.log(`First Number: ${displayNumber}`);
-        // console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
-        updateScreen(number);
-    } else {
-        secondNumber.push(number);
-        removeCommasFromScreen();
-        // console.log(`Second Number: ${displayNumber}`);
-        // console.log(`Display Number: ${displayNumber}` + `Type: ` + typeof(displayNumber))
-        updateScreen(number);
-    }
 
-
-    
-};
-
-const takeOperation = (operator) => {
-    if(firstNumber !== [] && canTakeOperation === true) {
-    takeSecondNumber = !takeSecondNumber;
-    operation = operator;
-    operatorTaken = true;
-    currentMath.textContent = displayNumber;
-    console.log(`The operation is ${operation}`);
-    console.log(`Take second number?:${takeSecondNumber}`);
-    if(operation == add) {
-        updateScreen('+');
-    } else if(operation == subtract){
-        updateScreen('-');
-    } else if(operation == multiply){
-        updateScreen('x');
-    } else if(operation == divide){
-        if (secondNumber !== 0) {
-        updateScreen('÷');
-
-    }
-} else {
-    return;
-}
-}
-}
-
-const round = (resultOfCalc) => {
-    return Math.round(resultOfCalc * 1000000) / 1000000;
-}
-
+/* Calc Functions */
 const calculate = () => {
-    console.log(`Can Take Operation: ${canTakeOperation}`);
-    console.log(`Second Num doesn't equal 0: ${secondNumber[0] !== 0}`);
-    console.log(`Operation isn't divide: ${operation.name !== divide}`);
-
-    if((canTakeOperation !== false) && ((operation.name !== divide) && (secondNumber[0]!== 0))) {
+    if((canTakeOperation !== false) && ((operation.name !== divide) && (+displayNumber !== 0))) {
     takeSecondNumber = false;
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
@@ -115,12 +66,58 @@ const calculate = () => {
     console.log(`Result: ${result}`);
     } else {
         alert("You cannot divide by zero!");
+        clearScreen();
+        clearNumbers();
     }
-    // console.log(`The calculation is ${operate(operation, firstNumber, secondNumber)}`);
-    // return operate(operation, firstNumber, secondNumber);
 
 
 };
+const takeOperation = (operator) => {
+    if(canTakeOperation === true) {
+    takeSecondNumber = !takeSecondNumber;
+    operation = operator;
+    currentMath.textContent = displayNumber;
+    console.log(`The operation is ${operation.name}`);
+        if(operation == add) {
+            updateScreen('+');
+        } else if(operation == subtract){
+            updateScreen('-');
+        } else if(operation == multiply){
+            updateScreen('x');
+        } else if(operation == divide){
+            if (secondNumber !== 0) {
+            updateScreen('÷');
+            }
+    } 
+    } 
+
+}
+const takeNumber = function(number) {
+    canTakeOperation = true;
+    if(!takeSecondNumber) {
+        firstNumber.push(number); 
+        removeCommasFromScreen();
+        console.log(`First Number: ${displayNumber}`);
+        console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
+        updateScreen(number);
+    } else {
+        secondNumber.push(number);
+        removeCommasFromScreen();
+        console.log(`Second Number: ${displayNumber}`);
+        console.log(`Display Number: ${displayNumber}` + ' ' + `Type: ` + typeof(displayNumber))
+        updateScreen(number);
+        secondNumberTaken = true;
+    }
+
+
+    
+};
+
+
+const round = (resultOfCalc) => {
+    return Math.round(resultOfCalc * 1000000) / 1000000;
+}
+
 const joinNumberArray = () => {
     //Added the unary operator to change each number from a string to a number
     firstNumber = +firstNumber.join().replaceAll(',', '');
@@ -130,13 +127,9 @@ const joinNumberArray = () => {
 
 const updateScreen = (screenText)=> {
 if((secondNumber.length === 0) && (operation === undefined)){
-    currentNumber.textContent = (result || displayNumber);
-    // if(!operation === undefined) {
-    //     currentMath.textContent +=  displayNumber;
-    // }
-    // currentNumber.textContent += screenText;
+    currentNumber.textContent = (displayNumber);
 }else{
-    currentNumber.textContent = (result || displayNumber);
+    currentNumber.textContent = (displayNumber);
     currentMath.textContent += screenText;
 }
 
