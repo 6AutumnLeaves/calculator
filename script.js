@@ -80,20 +80,21 @@ const takeOperation = (operator) => {
         updateScreen('÷');
     }
 }
+}
 
+const round = (resultOfCalc) => {
+    return Math.round(resultOfCalc * 1000000) / 1000000;
 }
 
 const calculate = () => {
     takeSecondNumber = false;
     joinNumberArray();
-    console.log(`First Number: ${firstNumber}`);
-    console.log(`Second Number: ${secondNumber}`);
-    console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
+    result = round(result);
+    displayNumber = result;
     updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
-    displayNumber = result;
     firstNumber.push(result);
     console.log(`After Calc, firstNum is ${firstNumber}`);
     console.log(takeSecondNumber);
