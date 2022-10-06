@@ -66,6 +66,7 @@ const takeOperation = (operator) => {
     if(firstNumber !== []) {
     takeSecondNumber = !takeSecondNumber;
     operation = operator;
+    
     currentMath.textContent = displayNumber;
     console.log(`The operation is ${operation}`);
     console.log(`Take second number?:${takeSecondNumber}`);
@@ -79,6 +80,7 @@ const takeOperation = (operator) => {
         updateScreen('÷');
     }
 }
+
 }
 
 const calculate = () => {
@@ -91,6 +93,7 @@ const calculate = () => {
     updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
+    displayNumber = result;
     firstNumber.push(result);
     console.log(`After Calc, firstNum is ${firstNumber}`);
     console.log(takeSecondNumber);
