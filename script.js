@@ -84,7 +84,7 @@ const calculate = () => {
     console.log(`Second Number: ${secondNumber}`);
     console.log(`The calculation is: ${firstNumber} ${operation} ${secondNumber}`);
     result = operate(operation, firstNumber, secondNumber);
-    updateScreen(` = ${result}`);
+    updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
     firstNumber.push(result);
