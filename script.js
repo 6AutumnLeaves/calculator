@@ -111,7 +111,7 @@ const joinNumberArray = () => {
 
 
 const updateScreen = (screenText)=> {
-if((firstNumber.length ===1) && (operation === undefined)){
+if((secondNumber.length === 0) && (operation === undefined)){
     currentNumber.textContent = (result || displayNumber);
     // if(!operation === undefined) {
     //     currentMath.textContent +=  displayNumber;
