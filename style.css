@@ -15,25 +15,12 @@ body {
     justify-content: center;
 }
 
-#screen {
-    display: flex;
-    padding: 40px 183px;
-    border: solid black 1px;
-    grid-area: screen;
-    border-radius: 10px;
-    background: white;
-    justify-content: center;
-}
 
-#screen-content {
-    font-size:x-large;
-    flex-wrap: wrap;
-    max-width: 10px;
-}
+
+
 .grid-container {
     display: grid;
     padding: 35px;
-    /* border: solid black 5px; */
     background: #393433;
     border-radius: 15px;
     align-items: center;
@@ -49,6 +36,27 @@ body {
     "one two three subtract"
     "decimal zero equals add"
 }
+
+#screen {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 120px;
+    width: 400px;
+    border: solid black 1px;
+    grid-area: screen;
+    border-radius: 10px;
+    background: white;
+    align-items: flex-end;
+    
+}
+
+#current {
+    font-size: 40px;
+    padding: 7px;
+}
+
+
+
 button {
     padding: 30px 40px;
     border: 0;
@@ -68,13 +76,30 @@ button:hover {
 background:#83b849;
 }
 
+/*Footer*/
+footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.3rem;
+}
+
+img {
+    background:none;
+    transition: .8s;
+}
+
+img:hover {
+    transition: .8s;
+    transform: scale(1.7);
+    filter:opacity(50%);
+}
+/*Grid Layout */
 .item-clear {
     grid-area: clear;
     background: #ffe878;
 }
 
 .item-clear:hover {
-    /* background: #bb655c; */
     background: goldenrod;
     color:white;
 }
@@ -83,8 +108,6 @@ background:#83b849;
     background: #648cc9;
 }
 .item-delete:hover {
-    /* background: #a45a52; */
-    /* background: #1f3667; */
     background: #244c66;
     color: white;
 }
@@ -140,21 +163,4 @@ background:#83b849;
 }
 .item-add {
     grid-area: add;
-}
-
-footer {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 1.3rem;
-}
-
-img {
-    background:none;
-    transition: .8s;
-}
-
-img:hover {
-    transition: .8s;
-    transform: scale(1.7);
-    filter:opacity(50%);
 }
