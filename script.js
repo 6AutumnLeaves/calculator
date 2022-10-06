@@ -1,22 +1,24 @@
-//operations 
+let firstNumber = [];
+let secondNumber = [];
+let displayNumber;
+let operation;
+let result = 0;
+let operatorTaken = false;
+let canTakeOperation = false;
+let takeSecondNumber = false;
 const numberButtons = document.querySelectorAll(".number");
 const currentMath = document.getElementById("history");
 const currentNumber = document.getElementById("current");
 
-let firstNumber = [];
-let secondNumber = [];
-let displayNumber = currentNumber;
-let operation;
-let result = 0;
-let takeSecondNumber = false;
 
 
+//operations 
 const add  = (a, b) => (a + b);
 const subtract = (a, b) => (a - b);
 const multiply = (a, b) => (a * b);
 const divide = (a, b) => (a / b);
 const operate = (operation, a, b) => operation(a, b);
-
+//functions
 const clearNumbers = function() {
 
     console.log("Clear has been clicked!");
@@ -44,6 +46,8 @@ const clearScreen = () => {
 // }
 
 const takeNumber = function(number) {
+    canTakeOperation = true;
+    console.log(`Can Take Operation ${canTakeOperation}`);
     if(!takeSecondNumber) {
         firstNumber.push(number); 
         removeCommasFromScreen();
@@ -63,10 +67,10 @@ const takeNumber = function(number) {
 };
 
 const takeOperation = (operator) => {
-    if(firstNumber !== []) {
+    if(firstNumber !== [] && canTakeOperation === true) {
     takeSecondNumber = !takeSecondNumber;
     operation = operator;
-    
+    operatorTaken = true;
     currentMath.textContent = displayNumber;
     console.log(`The operation is ${operation}`);
     console.log(`Take second number?:${takeSecondNumber}`);
@@ -77,8 +81,13 @@ const takeOperation = (operator) => {
     } else if(operation == multiply){
         updateScreen('x');
     } else if(operation == divide){
+        if (secondNumber !== 0) {
         updateScreen('÷');
+
     }
+} else {
+    return;
+}
 }
 }
 
@@ -87,6 +96,11 @@ const round = (resultOfCalc) => {
 }
 
 const calculate = () => {
+    console.log(`Can Take Operation: ${canTakeOperation}`);
+    console.log(`Second Num doesn't equal 0: ${secondNumber[0] !== 0}`);
+    console.log(`Operation isn't divide: ${operation.name !== divide}`);
+
+    if((canTakeOperation !== false) && ((operation.name !== divide) && (secondNumber[0]!== 0))) {
     takeSecondNumber = false;
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
@@ -99,6 +113,9 @@ const calculate = () => {
     console.log(`After Calc, firstNum is ${firstNumber}`);
     console.log(takeSecondNumber);
     console.log(`Result: ${result}`);
+    } else {
+        alert("You cannot divide by zero!");
+    }
     // console.log(`The calculation is ${operate(operation, firstNumber, secondNumber)}`);
     // return operate(operation, firstNumber, secondNumber);
 
@@ -124,10 +141,6 @@ if((secondNumber.length === 0) && (operation === undefined)){
 }
 
 }
-
-
-
-
 
 const removeCommasFromScreen = () => {
     if(!takeSecondNumber) {
