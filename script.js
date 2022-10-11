@@ -2,10 +2,12 @@ let firstNumber = [];
 let secondNumber = [];
 let displayNumber;
 let operation;
+let secondOperation;
 let result;
 let canTakeOperation = false;
 let takeSecondNumber = false;
 let secondNumberTaken = false;
+let chainedOperations = false;
 let decimalPressed = false;
 const numberButtons = document.querySelectorAll(".number");
 const currentMath = document.getElementById("history");
@@ -51,28 +53,38 @@ const clearScreen = () => {
 
 /* Calc Functions */
 const calculate = () => {
-    if((canTakeOperation !== false) && ((operation.name !== divide) && (+displayNumber !== 0))) {
+
+    
+    if(((canTakeOperation !== false) && (secondNumber !== [])) && ((operation.name !== divide) && (+displayNumber !== 0))) {
     takeSecondNumber = false;
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
     result = round(result);
-    displayNumber = result;
+    displayNumber = result || firstNumber;
     updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
     firstNumber.push(result);
     console.log(`After Calc, firstNum is ${firstNumber}`);
+    console.log(`Display Number: ${displayNumber}`);
     console.log(takeSecondNumber);
     console.log(`Result: ${result}`);
-    } else {
+    } else if(operation == divide){
         alert("You cannot divide by zero!");
-        clearScreen();
-        clearNumbers();
+        window.location.reload();
+    } else {
+        displayNumber = firstNumber;
+        console.log(displayNumber)
     }
 
 
 };
 const takeOperation = (operator) => {
+    if (secondNumber !== [] && operation !== undefined) {
+        calculate();
+        chainedOperations = true;
+    }
+
     if(canTakeOperation === true) {
     takeSecondNumber = !takeSecondNumber;
     operation = operator;
@@ -95,18 +107,24 @@ const takeOperation = (operator) => {
 const takeNumber = function(number) {
     canTakeOperation = true;
     if(!takeSecondNumber) {
+        if(firstNumber.length < 16) {
         firstNumber.push(number); 
         removeCommasFromScreen();
         console.log(`First Number: ${displayNumber}`);
         console.log(`Display Number: ${displayNumber}` + ' ' +`Type: ` + typeof(displayNumber));
         updateScreen(number);
-    } else {
+        } else {
+            return;
+        }
+    } else if(secondNumber.length < 16){
         secondNumber.push(number);
         removeCommasFromScreen();
         console.log(`Second Number: ${displayNumber}`);
         console.log(`Display Number: ${displayNumber}` + ' ' + `Type: ` + typeof(displayNumber))
         updateScreen(number);
         secondNumberTaken = true;
+    } else {
+        return;
     }
 
 
