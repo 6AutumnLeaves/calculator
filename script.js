@@ -45,10 +45,16 @@ const clearScreen = () => {
     currentNumber.textContent = 0;
 }
 
-// const deleteNumber = () => {
-//     console.log("Delete has been clicked!");
-//     numbers.pop();
-// }
+const deleteNumber = () => {
+    if(firstNumber !== [] ){
+        firstNumber.pop();
+        updateScreen(displayNumber = firstNumber.join(''))
+    } else {
+        secondNumber.pop();
+        joinNumberArray();
+        updateScreen(displayNumber = secondNumber.join(''))
+    }
+}
 
 
 /* Calc Functions */
