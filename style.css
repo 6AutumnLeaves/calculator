@@ -41,7 +41,7 @@ body {
     display: flex;
     flex-direction: column-reverse;
     height: 120px;
-    width: 400px;
+    width: 420px;
     border: solid black 1px;
     grid-area: screen;
     border-radius: 10px;
