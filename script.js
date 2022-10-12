@@ -222,6 +222,6 @@ const removeCommasFromScreen = () => {
 
 }
 
-//Keyboard Functionality
+
 
 
