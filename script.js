@@ -2,7 +2,6 @@ let firstNumber = [];
 let secondNumber = [];
 let displayNumber;
 let operation;
-let secondOperation;
 let result;
 let canTakeOperation = false;
 let equalPressed = false;
@@ -48,35 +47,52 @@ const clearNumbers = function() {
 // }
 
 const deleteNumber = () => {
-    if(firstNumber !== [] ){
-        firstNumber.pop();
-        updateScreen(displayNumber = firstNumber.join(''))
-    } else {
+    if (secondNumber.length !== 0){
         secondNumber.pop();
+        if(secondNumber.length === 0) {
+            decimalTaken = false;
+        }
         updateScreen(displayNumber = secondNumber.join(''))
-    }
+    
+    }else if(firstNumber.length !== 0){
+        firstNumber.pop();
+        if(firstNumber.length === 0) {
+            decimalTaken = false;
+        }
+        updateScreen(displayNumber = firstNumber.join(''))
 }
 
+};
+const consoleLog = () => {
+console.log(`%cFirstNum = ${firstNumber} (type = ${typeof(firstNumber)})`, 'color: yellow')
+console.log(`%cSecondNum = ${secondNumber} (type = ${typeof(secondNumber)})`, 'color: blue')
+console.log(`%cResult = ${result} (type = ${typeof(result)})`, 'color: green ')
+console.log(`%cDisplayNum = ${displayNumber} (type = ${typeof(displayNumber)})`, 'color: green ')
+console.log(`%cTake second Number = ${takeSecondNumber}`, 'color: blue')
+console.log(`%cChain Operations = ${chainedOperations}`, 'color: red')
+console.log(`%cEqual Pressed = ${equalPressed}`, 'color: green ');
+}
 
 /* Calc Functions */
 const calculate = () => {
     
     
-    if(((canTakeOperation !== false && firstNumber !== [] && secondNumber !== [])) && ((operation.name !== divide) && (+displayNumber !== 0))) {
+    if((canTakeOperation !== false && firstNumber !== []) && ((operation.name !== divide) && (+displayNumber !== 0))) {
     takeSecondNumber = false;
-    if(chainedOperations === true && equalPressed === false){
+        if(chainedOperations === true && equalPressed === false){
         equalPressed = false;
         takeSecondNumber = true;
     }else {
         equalPressed = true;
         takeSecondNumber = true;
+        chainedOperations = false;
     }
     decimalTaken = false;
     console.log('%cEqual has been pressed', 'color: green');
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
     result = round(result);
-    displayNumber = result || firstNumber;
+    displayNumber = result /* || firstNumber */;
     updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
@@ -85,6 +101,7 @@ const calculate = () => {
     console.log(`After Calc, secondNum = ${secondNumber}`);
     console.log(`Display Number: ${displayNumber}`);
     console.log(`Result: ${result}`);
+    console.log(`Take SecondNum = ${takeSecondNumber}`);
     } else if(operation == divide){
         alert("You cannot divide by zero!");
         window.location.reload();
@@ -95,18 +112,17 @@ const calculate = () => {
 
 };
 const takeOperation = (operator) => {
-    if (secondNumber !== [] && (operation !== undefined && equalPressed == false)) {
+    if ((secondNumber !== []) && (operation !== undefined && equalPressed == false)) {
         chainedOperations = true;
         calculate();
-        console.log("%cTake operation function has occurred","color: red");
-        console.log(`%cFirst Number = ${firstNumber}`, "color: blue");
-        console.log(`%cType of FirstNum: ${typeof(firstNumber)}`, 'color: blue');
-        console.log(`%cSecond Number = ${secondNumber}`, "color: yellow");
+        firstNumber = [];
+        firstNumber.push(result);
+        displayNumber = result;
     }
 
-    if(canTakeOperation === true) {
-
+    if(canTakeOperation === true || secondNumber === []) {
     takeSecondNumber = true;
+    decimalTaken = false;
     operation = operator;
     currentMath.textContent = displayNumber;
     console.log(`The operation is ${operation.name}`);
@@ -148,6 +164,8 @@ const takeNumber = (number) => {
     }
 
 
+
+
     
 };
 
@@ -165,6 +183,7 @@ const takeDecimal = (decimal) => {
         }
     } else if(secondNumber.length < 16 && decimalTaken === false){
         secondNumber.push(decimal);
+        decimalTaken = true;
         removeCommasFromScreen();
         console.log(`Second Number: ${displayNumber}`);
         console.log(`Display Number: ${displayNumber}` + ' ' + `Type: ` + typeof(displayNumber))
@@ -188,6 +207,7 @@ const joinNumberArray = () => {
 
 
 const updateScreen = (screenText)=> {
+    console.log(`Type of ScreenText = ${typeof(screenText)}`);
 if((secondNumber.length === 0) && (operation === undefined)){
     currentNumber.textContent = (displayNumber);
 }else{
