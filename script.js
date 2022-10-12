@@ -23,28 +23,28 @@ const divide = (a, b) => (a / b);
 const operate = (operation, a, b) => operation(a, b);
 //functions
 const clearNumbers = function() {
-    window.location.reload();
-    // console.log("Clear has been clicked!");
-    // firstNumber = [];
-    // secondNumber = [];
-    // result = undefined;
-    // displayNumber = undefined;
-    // operation = undefined;
-    // canTakeOperation = false;
-    // equalPressed = false;
-    // takeSecondNumber = false;
-    // decimalTaken = false;
-    // updateScreen();
-    // console.log(`First Number: ${firstNumber}`);
-    // console.log(`Second Number: ${secondNumber}`)
-    // console.log(`Take Second Number: ${takeSecondNumber}`);
-    // clearScreen();
+    console.log("Clear has been clicked!");
+    firstNumber = [];
+    secondNumber = [];
+    result = undefined;
+    displayNumber = undefined;
+    operation = undefined;
+    canTakeOperation = false;
+    equalPressed = false;
+    takeSecondNumber = false;
+    decimalTaken = false;
+    chainedOperations = false;
+    updateScreen();
+    console.log(`First Number: ${firstNumber}`);
+    console.log(`Second Number: ${secondNumber}`)
+    console.log(`Take Second Number: ${takeSecondNumber}`);
+    clearScreen();
 };
 
-// const clearScreen = () => {
-//     currentMath.textContent = '';
-//     currentNumber.textContent = 0;
-// }
+const clearScreen = () => {
+    currentMath.textContent = '';
+    currentNumber.textContent = 0;
+}
 
 const deleteNumber = () => {
     if (secondNumber.length !== 0){
