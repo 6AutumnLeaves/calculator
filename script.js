@@ -92,7 +92,6 @@ const calculate = () => {
     
     
     if((canTakeOperation !== false) && ((operation.name !== divide) && (+displayNumber !== 0))) {
-    takeSecondNumber = false;
         if(chainedOperations === true && equalPressed === false){
         equalPressed = false;
         takeSecondNumber = true;
@@ -100,16 +99,18 @@ const calculate = () => {
         equalPressed = true;
         takeSecondNumber = true;
         chainedOperations = false;
+        console.log('%cchained operations disabled', 'color, yellow');
     }
     decimalTaken = false;
     console.log('%cEqual has been pressed', 'color: green');
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
     result = round(result);
-    displayNumber = result /* || firstNumber */;
+    displayNumber = result || firstNumber;
     updateScreen(' = ');
     firstNumber = [];
     secondNumber = [];
+    operation = undefined;
     firstNumber.push(result);
     console.log(`After Calc, firstNum = ${firstNumber}`);
     console.log(`After Calc, secondNum = ${secondNumber}`);
@@ -126,10 +127,13 @@ const calculate = () => {
 
 };
 const takeOperation = (operator) => {
-    if ((secondNumber !== []) && (operation !== undefined && equalPressed == false)) {
+    if ((secondNumber !== []) && (operation !== undefined)) {
         chainedOperations = true;
+        console.log("%cchained operations active", "color:red");
         calculate();
         firstNumber = [];
+        equalPressed = false;
+        secondNumber = [];
         firstNumber.push(result);
         displayNumber = result;
         updateScreen(displayNumber);
