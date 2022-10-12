@@ -1,6 +1,5 @@
 # calculator
 A project that will recap everything I've learned so far in The Odin Project
-<h1>👉🏻<a href="https://6autumnleaves.github.io/calculator"> Link to Project</a></h1>
 
 Project Goals:
 
