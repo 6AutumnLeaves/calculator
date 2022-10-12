@@ -24,28 +24,28 @@ const divide = (a, b) => (a / b);
 const operate = (operation, a, b) => operation(a, b);
 //functions
 const clearNumbers = function() {
-
-    console.log("Clear has been clicked!");
-    firstNumber = [];
-    secondNumber = [];
-    result = undefined;
-    displayNumber = undefined;
-    operation = undefined;
-    canTakeOperation = false;
-    equalPressed = false;
-    takeSecondNumber = false;
-    decimalTaken = false;
-    updateScreen();
-    console.log(`First Number: ${firstNumber}`);
-    console.log(`Second Number: ${secondNumber}`)
-    console.log(`Take Second Number: ${takeSecondNumber}`);
-    clearScreen();
+    window.location.reload();
+    // console.log("Clear has been clicked!");
+    // firstNumber = [];
+    // secondNumber = [];
+    // result = undefined;
+    // displayNumber = undefined;
+    // operation = undefined;
+    // canTakeOperation = false;
+    // equalPressed = false;
+    // takeSecondNumber = false;
+    // decimalTaken = false;
+    // updateScreen();
+    // console.log(`First Number: ${firstNumber}`);
+    // console.log(`Second Number: ${secondNumber}`)
+    // console.log(`Take Second Number: ${takeSecondNumber}`);
+    // clearScreen();
 };
 
-const clearScreen = () => {
-    currentMath.textContent = '';
-    currentNumber.textContent = 0;
-}
+// const clearScreen = () => {
+//     currentMath.textContent = '';
+//     currentNumber.textContent = 0;
+// }
 
 const deleteNumber = () => {
     if(firstNumber !== [] ){
@@ -64,13 +64,15 @@ const calculate = () => {
     
     if(((canTakeOperation !== false && firstNumber !== [] && secondNumber !== [])) && ((operation.name !== divide) && (+displayNumber !== 0))) {
     takeSecondNumber = false;
-    equalPressed = true;
-    decimalTaken = false;
-    console.log('%cEqual has been pressed', 'color: green');
-    if(chainedOperations === true){
+    if(chainedOperations === true && equalPressed === false){
         equalPressed = false;
         takeSecondNumber = true;
+    }else {
+        equalPressed = true;
+        takeSecondNumber = true;
     }
+    decimalTaken = false;
+    console.log('%cEqual has been pressed', 'color: green');
     joinNumberArray();
     result = operate(operation, firstNumber, secondNumber);
     result = round(result);
@@ -103,7 +105,8 @@ const takeOperation = (operator) => {
     }
 
     if(canTakeOperation === true) {
-    takeSecondNumber = !takeSecondNumber;
+
+    takeSecondNumber = true;
     operation = operator;
     currentMath.textContent = displayNumber;
     console.log(`The operation is ${operation.name}`);
