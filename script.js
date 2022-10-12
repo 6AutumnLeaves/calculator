@@ -45,13 +45,26 @@ const clearScreen = () => {
     currentMath.textContent = '';
     currentNumber.textContent = 0;
 }
-
+const pushOperatorSymbol = () => {
+    if(operation == add) {
+        return '+';
+    } else if(operation == subtract){
+        return '-';
+    } else if(operation == multiply){
+        return 'x';
+    } else if(operation == divide){
+        if (secondNumber !== 0) {
+        return '÷';
+        }
+} 
+}
 const deleteNumber = () => {
     if (secondNumber.length !== 0){
         secondNumber.pop();
         if(secondNumber.length === 0) {
             decimalTaken = false;
         }
+        currentMath.textContent = `${firstNumber.join('')}${pushOperatorSymbol()}`
         updateScreen(displayNumber = secondNumber.join(''))
     
     }else if(firstNumber.length !== 0){
@@ -63,6 +76,7 @@ const deleteNumber = () => {
 }
 
 };
+
 const consoleLog = () => {
 console.log(`%cFirstNum = ${firstNumber} (type = ${typeof(firstNumber)})`, 'color: yellow')
 console.log(`%cSecondNum = ${secondNumber} (type = ${typeof(secondNumber)})`, 'color: blue')
@@ -77,7 +91,7 @@ console.log(`%cEqual Pressed = ${equalPressed}`, 'color: green ');
 const calculate = () => {
     
     
-    if((canTakeOperation !== false && firstNumber !== []) && ((operation.name !== divide) && (+displayNumber !== 0))) {
+    if((canTakeOperation !== false) && ((operation.name !== divide) && (+displayNumber !== 0))) {
     takeSecondNumber = false;
         if(chainedOperations === true && equalPressed === false){
         equalPressed = false;
@@ -118,6 +132,7 @@ const takeOperation = (operator) => {
         firstNumber = [];
         firstNumber.push(result);
         displayNumber = result;
+        updateScreen(displayNumber);
     }
 
     if(canTakeOperation === true || secondNumber === []) {
