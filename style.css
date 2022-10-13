@@ -180,6 +180,7 @@ img:hover {
         min-height: 100vh;
         text-align: center;
         color: black;
+        -webkit-text-fill-color: black;
     }
     .flex-container {
         min-height: 90vh;
