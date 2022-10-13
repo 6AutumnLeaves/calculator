@@ -177,8 +177,9 @@ img:hover {
 /*For mobile responsiveness*/
 @media only screen and (max-width: 600px) {
     body {
-        width: 100%;
+        min-height: 100vh;
         text-align: center;
+        color: black;
     }
     .flex-container {
         min-height: 90vh;
