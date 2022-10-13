@@ -1,8 +1,6 @@
-@viewport {
-  width: device-width ;
-  zoom: 1.0 ;
-}
 
+
+/*Style of Calc*/
 body {
     min-height: 100vh;
     font-family: 'Courier New', Courier, monospace;
@@ -174,3 +172,35 @@ img:hover {
 .item-add {
     grid-area: add;
 }
+
+
+/*For mobile responsiveness*/
+@media only screen and (max-width: 600px) {
+    body {
+        width: 100%;
+        text-align: center;
+    }
+    .flex-container {
+        min-height: 90vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #screen {
+       width: 100%;
+    }
+    
+    button {
+    padding: 20px 26px;
+    border: 0;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: bold;
+    transition: .25s;
+}
+footer {
+    text-align:center;
+    width: 85%;
+}
+    }
