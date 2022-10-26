@@ -66,9 +66,10 @@ const deleteNumber = () => {
 
 /* Calc Functions */
 const calculate = () => {
-    
-    
-    if(((secondNumber.length !== 0 && canTakeOperation !== false)) && ((operation.name !== divide) && (+displayNumber !== 0))) {
+    if(operation == divide && secondNumber == 0){
+        alert("You cannot divide by zero!");
+        window.location.reload();
+    }else if(((secondNumber.length !== 0 && canTakeOperation !== false))) {
         if(chainedOperations === true && equalPressed === false){
             equalPressed = false;
             takeSecondNumber = true;
@@ -87,9 +88,6 @@ const calculate = () => {
     secondNumber = [];
     operation = undefined;
     firstNumber.push(result);
-} else if(operation == divide){
-    alert("You cannot divide by zero!");
-    window.location.reload();
 } else {
         return;
     }
