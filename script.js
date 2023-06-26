@@ -80,7 +80,7 @@ const calculate = () => {
         clearScreen();
     }else if(((secondNumber.length !== 0 && canTakeOperation !== false))) {
         if(chainedOperations === true && equalPressed === false){
-            equalPressed = false;
+            equalPressed = true;
             takeSecondNumber = true;
 
         }else {
@@ -244,4 +244,5 @@ const displayNumbers = () => {
     console.log(`second num: ${secondNumber}`)
     console.log(`display num: ${displayNumber}`)
     console.log(`takeSecondNumber: ${takeSecondNumber}`);
+    console.log(`equalPressed: ${equalPressed}`)
 }
