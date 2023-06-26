@@ -45,7 +45,14 @@ const clearScreen = () => {
     currentNumber.textContent = 0;
 }
 const deleteNumber = () => {
-    if (secondNumber.length !== 0){
+    //FIXME: Delete needs to clear screen
+    //  if equals was the last operation
+    //This if statement directly below is the attempt
+    // to fix this issue
+    if(displayNumber === undefined){
+        clearNumbers();
+        clearScreen();
+    }else if (secondNumber.length !== 0){
         secondNumber.pop();
         if(secondNumber.length === 0) {
             decimalTaken = false;
@@ -61,6 +68,7 @@ const deleteNumber = () => {
         updateScreen(displayNumber = firstNumber.join(''))
     }
     
+    
 };
 
 
@@ -68,11 +76,13 @@ const deleteNumber = () => {
 const calculate = () => {
     if(operation == divide && secondNumber == 0){
         alert("You cannot divide by zero!");
-        window.location.reload();
+        clearNumbers();
+        clearScreen();
     }else if(((secondNumber.length !== 0 && canTakeOperation !== false))) {
         if(chainedOperations === true && equalPressed === false){
             equalPressed = false;
             takeSecondNumber = true;
+
         }else {
             equalPressed = true;
         takeSecondNumber = true;
@@ -96,6 +106,7 @@ const calculate = () => {
 };
 
 const takeOperation = (operator) => {
+    equalPressed = false;
     if ((secondNumber.length !== 0) && (operation !== undefined)) {
         chainedOperations = true;
         console.log('%cchained operations is active', "color:red");
@@ -129,6 +140,11 @@ const takeOperation = (operator) => {
 }
 
 const takeNumber = (number) => {
+   if(equalPressed === true) {
+        clearNumbers()
+        clearScreen();
+    }
+    
     canTakeOperation = true;
     if(!takeSecondNumber && chainedOperations === false) {
         if(firstNumber.length < 16) {
@@ -202,9 +218,12 @@ const updateScreen = (screenText)=> {
     console.log(`Type of ScreenText = ${typeof(screenText)}`);
 if((secondNumber.length === 0) && (operation === undefined)){
     currentNumber.textContent = (displayNumber);
+
+    displayNumbers()
 }else{
     currentNumber.textContent = (displayNumber);
     currentMath.textContent += screenText;
+    displayNumbers()
 }
 
 }
@@ -220,6 +239,9 @@ const removeCommasFromScreen = () => {
 
 }
 
-
-
-
+const displayNumbers = () => {
+    console.log(`first num: ${firstNumber}`)
+    console.log(`second num: ${secondNumber}`)
+    console.log(`display num: ${displayNumber}`)
+    console.log(`takeSecondNumber: ${takeSecondNumber}`);
+}
